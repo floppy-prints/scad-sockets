@@ -17,14 +17,20 @@ use_all_defaults() use_tolerance(0.4) {
 
 module cutouts() {
 
-    
+    socket_sets = socket_sets();
+    use_sets = [ 
+        socket_sets.sae_shallow_38,
+        socket_sets.sae_deep_38,
+        socket_sets.mm_shallow_38,
+        socket_sets.mm_deep_38,
+    ];
 
     use_label_placement("below")
     use_label_valign("center")
     use_label_font("Bender:style=Black")
     use_socket_drive(3/8) 
     use_socket_set_width(230) {
-        for( socket_set = sets ) {
+        for( socket_set = use_sets ) {
             translate( socket_set.offset )
             rotate( is_undef(socket_set.flip_labels) ? [0,0,0] : [0,0,180] )
             use_labels( socket_set.labels)
@@ -34,7 +40,7 @@ module cutouts() {
             sockets( depth=socket_set.depth, centered=false );
         }
     }
-    
+    /*
     translate( [-90,-84,30] ) rotate([90,0,90]) socket_adapter_blank( h1=adapters[0].h1, h2=adapters[0].h2, h3=adapters[0].h3, d1=adapters[0].d1, w=adapters[0].w );
     
     translate( [84,-84,7] ) {
@@ -45,4 +51,5 @@ module cutouts() {
     }
     
     translate( [37,15,28] ) rotate([0,90,0]) socket_extension_blank( h=150, h1=extensions[1].h1, h2=extensions[1].h2, h3=extensions[1].h3, d1=extensions[1].d1, w=extensions[1].w );
+    */
 }
