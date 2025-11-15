@@ -4,14 +4,23 @@ use <imports/sockets.scad>;
 use <imports/adapters.scad>;
 use <defs/all.scad>;
 use <defs/tstak.scad>;
-//use <imports/magnet-inserts.scad>;
+use <imports/magnet-inserts.scad>;
 
-use_all_defaults() use_tolerance(1) {
+use_all_defaults() use_tolerance(0.2) use_magnet_nut_hole_punch(6) resin_print() {
 
+    translate([0,-10,0])
+    use_magnet_diameter(10) 
+    use_magnet_nut_thickness(10)
+    make_magnet_set( sizes=[12,13,14,15], space_between=5, center=true );
+
+    translate([0,10,0])
+    use_magnet_diameter(10) 
+    use_magnet_nut_thickness(15)
+    make_magnet_set( sizes=[14,15,16,17,19,21], space_between=5, center=true );
+
+    
+    /*
     difference() {
-        /*rotate( [-90,0,0] ) {
-          import("models/tstak-side[base-x2-drawer].stl", convexity = 5, center=true);
-        }*/
         use_default_module_defs() {
             use_module_height(60)
             has_corner_pocket() 
@@ -23,9 +32,11 @@ use_all_defaults() use_tolerance(1) {
         }
         cutouts();
     }
+    */
 }
 
-module cutouts() {
+
+module right_tstak_shallow_mm_sockets() {
 
     socket_sets = socket_sets();
     use_sets = [ 

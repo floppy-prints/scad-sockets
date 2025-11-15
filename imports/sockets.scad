@@ -93,34 +93,6 @@ module socket_cutout( size, depth=$scoped_socket_depth, drive=$scoped_socket_dri
 }
 
 /**
- * add_tolerance
- * 
- * adds a specified amount to an object dimension
- * 
- * object_size: the original object dimension
- * tolerance: (scoped*) the amount to add
- */
-__add_tolerance = function( object_size, tolerance = $scoped_tolerance ) (
-    object_size + ( is_undef(tolerance) ? 0 : tolerance )
-);
-function add_tolerance( object_size, tolerance = $scoped_tolerance ) =
-    __add_tolerance( object_size, tolerance );
-
-/**
- * subtract_tolerance
- * 
- * removes a specified amount from an object
- * 
- * object_size: the original object dimension
- * tolerance: (scoped*) the amount to remove
- */
-__subtract_tolerance = function( object_size, tolerance = $scoped_tolerance ) (
-    object_size - ( is_undef(tolerance) ? 0 : tolerance )
-);
-function subtract_tolerance( object_size, tolerance = $scoped_tolerance ) =
-    __subtract_tolerance( object_size, tolerance );
-
-/**
  * add_tolerance_to_set
  * 
  * applies a specified tolerance amount to each value in a list of socket diameters

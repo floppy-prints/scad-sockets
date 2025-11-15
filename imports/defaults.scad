@@ -10,11 +10,18 @@ module use_all_defaults() {
 
 module use_general_defaults() {
     $scoped_tolerance = 0;
+    $scoped_for_resin = false;
+    $scoped_resin_wall_max_width = 3;
     children();
 }
 
 module use_tolerance(value) {
     $scoped_tolerance = value;
+    children();
+}
+
+module resin_print(value=true) {
+    $scoped_for_resin = value;
     children();
 }
 
@@ -144,7 +151,7 @@ module use_magnet_nut_hole_punch(value) {
     children();
 }
 
-module use_magnet_nut_depth(value) {
+module use_magnet_nut_thickness(value) {
     $scoped_magnet_nut_depth = value;
     children();
 }

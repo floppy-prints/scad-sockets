@@ -1,18 +1,50 @@
 use <tests.scad>
 
-module cylinder_outer( h, r=undef, d=undef, fn=$fn) {
+module cylinder_outer( h, r=undef, d=undef, center=true, fn=$fn) {
    if ( is_undef(r) && is_undef(d) ) {
      assert(false,"must specify r or d when calling cylinder_outer");
    }
    radius = is_undef(r) ? d/2 : r;
    fudge = 1 / cos( 180 / fn );
-   cylinder( h=h, r=radius*fudge, center=true, $fn=fn );
+   
+   echo(str("DEBUG: making outer cylinder - radius: ", radius, "; fudge", fudge, "; fn:", fn));
+   cylinder( h=h, r=radius*fudge, center=center, $fn=fn );
 }
 
 module reduce_moire(direction=[0,0,1]) {
     translate( 1/128 * direction )
     children();
 }
+
+
+/**
+ * add_tolerance
+ * 
+ * adds a specified amount to an object dimension
+ * 
+ * object_size: the original object dimension
+ * tolerance: (scoped*) the amount to add
+ */
+__add_tolerance = function( object_size, tolerance = $scoped_tolerance ) (
+    object_size + ( is_undef(tolerance) ? 0 : tolerance )
+);
+function add_tolerance( object_size, tolerance = $scoped_tolerance ) =
+    __add_tolerance( object_size, tolerance );
+
+/**
+ * subtract_tolerance
+ * 
+ * removes a specified amount from an object
+ * 
+ * object_size: the original object dimension
+ * tolerance: (scoped*) the amount to remove
+ */
+__subtract_tolerance = function( object_size, tolerance = $scoped_tolerance ) (
+    object_size - ( is_undef(tolerance) ? 0 : tolerance )
+);
+function subtract_tolerance( object_size, tolerance = $scoped_tolerance ) =
+    __subtract_tolerance( object_size, tolerance );
+
 
 __sum_list = function ( list, limit = undef, index = 0, sum = 0 ) (
     ! is_list(list) // this is essentially to prevent an infinite loop on failure
@@ -40,6 +72,15 @@ __sae_to_mm = function( inches, precision = 2 ) let (
 function sae_to_mm( inches, precision = 2 ) =
   __sae_to_mm( inches, precision );
 
+__mm_to_sae = function( inches, precision = 2 ) let (
+    magnitude = pow( 10, precision )
+) (
+    round( magnitude * ( 25.4 / mm ) ) / magnitude
+);
+function mm_to_sae( inches, precision = 2 ) =
+  __mm_to_sae( inches, precision );
+
+  
 // the following tests will be run if you preview this file directly
   
 mm_list  = [1,2,3,5,7,11,13,17,19,23,29];
