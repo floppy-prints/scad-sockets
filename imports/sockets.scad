@@ -77,7 +77,7 @@ module socket_cutout( size, depth=$scoped_socket_depth, drive=$scoped_socket_dri
        echo(str("DEBUG: adding drive to cutout: ", $scoped_socket_drive ));
     }
     difference() {
-        cylinder_outer( h=depth, r=(size + $scoped_tolerance)/2, fn=64 );
+        cylinder_outer( h=depth, d=size + $scoped_tolerance, fn=64 );
         difference() {
             if ( is_num(drive) ) {
               color("blue") reduce_moire([0,0,-1]) translate([ 0, 0, -depth/2 + drive/2 ] )

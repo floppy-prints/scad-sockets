@@ -1,0 +1,9 @@
+<!-- ARC is A xrad yrad xrotation-degrees largearc sweep end_x end_y -->
+
+<svg height='8.228in' width='11.575in' version='1.1' viewBox='0.000 0.000 11.575 8.228' x='0.000in' y='0.000in' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:shaper='http://www.shapertools.com/namespaces/shaper' shaper:sketchupaddin='3.1.0' >
+<title >dewalt-tstak-inserts-v2 cut profile
+</title>
+<desc >Shaper cut profile from Sketchup model dewalt-tstak-inserts-v2
+</desc>
+<path d='M 11.575 8.228 L 11.575 0.480  L 10.679 0.000  L 1.090 0.000  L 0.000 0.538  L 0.000 1.198  L 0.787 1.198  L 0.787 4.299  L 1.102 4.455  L 1.102 8.228  L 11.575 8.228 Z ' transform='matrix(1,0,0,-1,0.0,8.228)' shaper:pathType='exterior' shaper:cutDepth='0.197in' fill='rgb(0,0,0)' />
+</svg>

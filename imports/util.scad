@@ -1,8 +1,12 @@
 use <tests.scad>
 
-module cylinder_outer( h, r, fn) {
+module cylinder_outer( h, r=undef, d=undef, fn=$fn) {
+   if ( is_undef(r) && is_undef(d) ) {
+     assert(false,"must specify r or d when calling cylinder_outer");
+   }
+   radius = is_undef(r) ? d/2 : r;
    fudge = 1 / cos( 180 / fn );
-   cylinder( h=h, r=r*fudge, center=true, $fn=fn );
+   cylinder( h=h, r=radius*fudge, center=true, $fn=fn );
 }
 
 module reduce_moire(direction=[0,0,1]) {
